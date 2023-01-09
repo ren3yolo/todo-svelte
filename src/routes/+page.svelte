@@ -1,18 +1,19 @@
 <script>
-	let tasks = [{ done: false, name: '' }];
+	let tasks = [{ done: false, name: '', id: 1 }];
 	let newTask = '';
 
 	import Todo from './components/Todo.svelte';
+	import { v4 as uuid } from 'uuid';
 
 	/**
-	 * @param {{ detail: { task: { name: any; }; }; }} event
+	 * @param {{ detail: { task: { name: string; done: boolean; id: number }; }; }} event
 	 */
-	function handleComplete(event) {
-		alert(event.detail.task.name);
+	function handleRemove(event) {
+		tasks = [...tasks.filter((t) => t.id !== event.detail.task.id)];
 	}
 
 	function addTodo() {
-		tasks = [...tasks, { done: false, name: newTask }];
+		tasks = [...tasks, { done: false, name: newTask, id: uuid() }];
 		newTask = '';
 	}
 </script>
@@ -39,9 +40,9 @@
 			</form>
 
 			<div class="my-6">
-				{#each tasks as task (task.name)}
+				{#each tasks as task (task.id)}
 					{#if task.name.length > 0}
-						<Todo {task} />
+						<Todo {task} on:remove={handleRemove} />
 					{/if}
 				{/each}
 			</div>

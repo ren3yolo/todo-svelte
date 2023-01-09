@@ -1,15 +1,30 @@
 <script>
-	export let task = { done: false, name: '' };
+	let completed = false;
+	export let task = { done: false, name: '', id: 1 };
+	import { createEventDispatcher } from 'svelte';
+
+	const dispatch = createEventDispatcher();
+
+	function remove() {
+		completed = true;
+		setTimeout(() => {
+			dispatch('remove', {
+				task
+			});
+		}, 300);
+	}
 </script>
 
 <div
-	class="h-16 my-4 flex justify-between items-center px-4 rounded-xl shadow-lg border-slate-100 bg-slate-50 hover:bg-slate-200 duration-100 hover:border-0 text-slate-900"
+	class={`todo_item ${
+		completed ? 'complete' : ''
+	}  h-16 my-4 flex justify-between items-center px-4 rounded-xl shadow-lg border-slate-100 bg-slate-50 hover:bg-slate-200 hover:border-0 text-slate-900`}
 >
 	<div id="check_and_taskname">
 		{task.name}
 	</div>
 	<div id="action_items" class="flex gap-4">
-		<button class="text-lime-600 hover:scale-150 duration-300">
+		<button class="text-lime-600 hover:scale-150 duration-300" on:click={remove}>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				viewBox="0 0 24 24"
@@ -23,7 +38,7 @@
 				/>
 			</svg>
 		</button>
-		<button class="text-red-600 hover:scale-150 duration-300">
+		<button class="text-red-600 hover:scale-150 duration-300" on:click={remove}>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				viewBox="0 0 24 24"
@@ -39,3 +54,35 @@
 		</button>
 	</div>
 </div>
+
+<style>
+	@keyframes fadeIn {
+		0% {
+			opacity: 0;
+		}
+		50% {
+			opacity: 0.5;
+		}
+		100% {
+			opacity: 1;
+		}
+	}
+
+	@keyframes fadeOut {
+		from {
+			opacity: 1;
+		}
+		to {
+			opacity: 0;
+			transform: translateX(-100px);
+		}
+	}
+
+	.todo_item {
+		animation: fadeIn 0.3s ease-in;
+	}
+
+	.complete {
+		animation: fadeOut 0.3s linear;
+	}
+</style>
