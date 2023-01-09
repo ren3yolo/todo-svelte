@@ -18,12 +18,12 @@
 <div
 	class={`todo_item ${
 		completed ? 'complete' : ''
-	}  h-16 my-4 flex justify-between items-center px-4 rounded-xl shadow-lg border-slate-100 bg-slate-50 hover:bg-slate-200 hover:border-0 text-slate-900`}
+	} h-fit my-4 grid grid-cols-6 grid-rows-1 items-center px-4 py-4 rounded-xl shadow-lg border-slate-100 bg-slate-50 hover:bg-slate-200 hover:border-0 text-slate-900`}
 >
-	<div id="check_and_taskname">
+	<div id="check_and_taskname" class="col-span-5 break-words">
 		{task.name}
 	</div>
-	<div id="action_items" class="flex gap-4">
+	<div id="action_items" class="flex gap-2 ml-auto">
 		<button class="text-lime-600 hover:scale-150 duration-300" on:click={remove}>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
