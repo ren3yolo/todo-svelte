@@ -9,7 +9,7 @@
 	</div>
 	{#if $user.picture}
 		<div class="h-full w-10 rounded-full flex items-center">
-			<img class="rounded-full" src={$user.picture} alt={user.nickname} />
+			<img class="rounded-full" src={$user.picture} alt={$user.nickname} />
 		</div>
 	{/if}
 </div>
