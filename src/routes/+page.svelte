@@ -1,12 +1,12 @@
 <script>
-	let tasks = [{ done: false, name: '', id: 1 }];
+	let tasks = [{ done: false, name: '', id: '1' }];
 	let newTask = '';
 
 	import Todo from './components/Todo.svelte';
 	import { v4 as uuid } from 'uuid';
 
 	/**
-	 * @param {{ detail: { task: { name: string; done: boolean; id: number }; }; }} event
+	 * @param {{ detail: { task: { name: string; done: boolean; id: string }; }; }} event
 	 */
 	function handleRemove(event) {
 		tasks = [...tasks.filter((t) => t.id !== event.detail.task.id)];
@@ -18,12 +18,18 @@
 	}
 </script>
 
-<main class="my-6 w-screen h-screen flex flex-col">
-	<header class="w-full text-center">
-		<h1 class="text-2xl">Make your life organised.</h1>
+<main class="my-6 mt-28 w-screen h-screen flex flex-col">
+	<header class="w-full text-center" id="heading">
+		<h1 class="text-4xl font-bold text-slate-900">Manage Your Chores Better</h1>
 	</header>
 
-	<h2 class="text-center text-xl my-6">Your tasks</h2>
+	<h2 class="text-center text-slate-800 text-xl font-medium my-6">
+		{#if tasks[0].name.length > 0}
+			Your tasks
+		{:else}
+			Add a task below to get started
+		{/if}
+	</h2>
 
 	<section class="w-full flex justify-center">
 		<div class="w-3/4 md:w-1/2">
@@ -32,10 +38,14 @@
 					<input
 						type="text"
 						placeholder="Wish to track a chore? Add it here"
-						class="w-full h-10 ring-2 ring-indigo-400 focus:ring-indigo-700 hover:ring-indigo-500 outline-none rounded-md px-4"
+						class="w-full h-10 ring-2 ring-slate-700 focus:ring-black hover:ring-slate-500 outline-none rounded-md px-4"
 						bind:value={newTask}
 					/>
-					<button class="rounded bg-indigo-600 h-10 w-20 text-white"> Add </button>
+					<button
+						class="rounded bg-black text-white h-10 w-28 px-2 hover:shadow-2xl hover:scale-105 duration-300"
+					>
+						Add task
+					</button>
 				</div>
 			</form>
 

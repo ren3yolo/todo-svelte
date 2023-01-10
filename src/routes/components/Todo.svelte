@@ -1,6 +1,6 @@
 <script>
 	let completed = false;
-	export let task = { done: false, name: '', id: 1 };
+	export let task = { done: false, name: '', id: '1' };
 	import { createEventDispatcher } from 'svelte';
 
 	const dispatch = createEventDispatcher();

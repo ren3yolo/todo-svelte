@@ -30,6 +30,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@auth0/auth0-spa-js": "^2.0.1",
 		"uuid": "^9.0.0"
 	}
 }
