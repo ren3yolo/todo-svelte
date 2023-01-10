@@ -24,7 +24,7 @@
 	</header>
 
 	<h2 class="text-center text-slate-800 text-xl font-medium my-6">
-		{#if tasks[0].name.length > 0}
+		{#if tasks.length > 1}
 			Your tasks
 		{:else}
 			Add a task below to get started
